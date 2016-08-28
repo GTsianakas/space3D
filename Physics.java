@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Physics{
 
   private ArrayList<PhysicalObject> list = null;
-  private static double interval = 0.01;
+  private static double interval = 0.001;
   private static final double GRAVITY_CONSTANT = 6.67408E-11; //m^3.kg^-1.s^-2
 
   public Physics(ArrayList<PhysicalObject> po){
@@ -18,19 +18,19 @@ public class Physics{
   //assumes all objects same mass
   public double getForceX(PhysicalObject o1, PhysicalObject o2){
     double d = getDistance(o1,o2);
-    return ((GRAVITY_CONSTANT * o1.getMass() * o2.getMass() *getDistanceX(o1,o2))/d*d*d)/2;
+    return ((GRAVITY_CONSTANT * o1.getMass() * o2.getMass() *getDistanceX(o1,o2))/d*d*d)/(o1.getMass()/o2.getMass());
   }
 
   //assumes all objects same mass
   public double getForceY(PhysicalObject o1, PhysicalObject o2){
     double d = getDistance(o1,o2);
-    return ((GRAVITY_CONSTANT * o1.getMass() * o2.getMass() *getDistanceY(o1,o2))/d*d*d)/2;
+    return ((GRAVITY_CONSTANT * o1.getMass() * o2.getMass() *getDistanceY(o1,o2))/d*d*d)/(o1.getMass()/o2.getMass());
   }
 
   //assumes all objects same mass
   public double getForceZ(PhysicalObject o1, PhysicalObject o2){
     double d = getDistance(o1,o2);
-    return ((GRAVITY_CONSTANT * o1.getMass() * o2.getMass() * getDistanceZ(o1,o2))/d*d*d)/2;
+    return ((GRAVITY_CONSTANT * o1.getMass() * o2.getMass() * getDistanceZ(o1,o2))/d*d*d)/(o1.getMass()/o2.getMass());
   }
 
   public double getDistance(PhysicalObject o1, PhysicalObject o2){
@@ -78,6 +78,7 @@ public class Physics{
           obj1.setPosX(obj1.getPosX()+obj1.getSpeedX()*interval - 0.5*forceX*obj1.getAccX());
           obj1.setPosY(obj1.getPosY()+obj1.getSpeedY()*interval - 0.5*forceY*obj1.getAccY());
           obj1.setPosZ(obj1.getPosZ()+obj1.getSpeedZ()*interval - 0.5*forceZ*obj1.getAccZ());
+          //System.out.println(obj1.getPosX());
         }
         obj1.update();
       }
