@@ -31,7 +31,7 @@ public class Driver extends Application{
     scene.setFill(Color.web("000000"));
 
     //load objects and pass in group
-    sphereList = new DemoOne().getList();
+    sphereList = new DemoThree().getList();
     for (PhysicalObject sphere : sphereList){ root.getChildren().add(sphere.draw()); }
 
     this.addCoordLines(root);
