@@ -3,11 +3,16 @@ import java.util.ArrayList;
 public class Physics{
 
   private ArrayList<PhysicalObject> list = null;
-  private static double interval = 0.001;
+  private static double interval = 0.0001;
   private static final double GRAVITY_CONSTANT = 6.67408E-11; //m^3.kg^-1.s^-2
 
   public Physics(ArrayList<PhysicalObject> po){
     this.list = po;
+  }
+
+  public Physics(ArrayList<PhysicalObject> po, double interval){
+    this.list = po;
+    this.interval = interval;
   }
 
   public double gravityAcceleration(PhysicalObject s1, PhysicalObject s2){
@@ -15,28 +20,26 @@ public class Physics{
     return GRAVITY_CONSTANT *(s1.getMass() * s2.getMass())/(distance * distance);
   }
 
-  //assumes all objects same mass
   public double getForceX(PhysicalObject o1, PhysicalObject o2){
     double d = getDistance(o1,o2);
     return ((GRAVITY_CONSTANT * o1.getMass() * o2.getMass() *getDistanceX(o1,o2))/d*d*d)/(o1.getMass()/o2.getMass());
   }
 
-  //assumes all objects same mass
   public double getForceY(PhysicalObject o1, PhysicalObject o2){
     double d = getDistance(o1,o2);
     return ((GRAVITY_CONSTANT * o1.getMass() * o2.getMass() *getDistanceY(o1,o2))/d*d*d)/(o1.getMass()/o2.getMass());
   }
 
-  //assumes all objects same mass
   public double getForceZ(PhysicalObject o1, PhysicalObject o2){
     double d = getDistance(o1,o2);
     return ((GRAVITY_CONSTANT * o1.getMass() * o2.getMass() * getDistanceZ(o1,o2))/d*d*d)/(o1.getMass()/o2.getMass());
   }
 
   public double getDistance(PhysicalObject o1, PhysicalObject o2){
-    double a = o1.getPosX() - o2.getPosX();
-    double b = o1.getPosY() - o2.getPosY();
-    double c = o1.getPosZ() - o2.getPosZ();
+    //use of translate to update positions together
+    double a = o1.getPosX() - o2.draw().getTranslateX();
+    double b = o1.getPosY() - o2.draw().getTranslateY();
+    double c = o1.getPosZ() - o2.draw().getTranslateZ();
     return Math.sqrt(a*a + b*b + c*c);
   }
 
@@ -53,7 +56,6 @@ public class Physics{
   }
 
   public void updatePhysics(){
-  //assumes same mass for all particles
     for (PhysicalObject obj1 : list){
       for (PhysicalObject obj2 : list){
         if (obj1 != obj2){
@@ -80,9 +82,14 @@ public class Physics{
           obj1.setPosZ(obj1.getPosZ()+obj1.getSpeedZ()*interval - 0.5*forceZ*obj1.getAccZ());
           //System.out.println(obj1.getPosX());
         }
-        obj1.update();
       }
+
     }
+    //to update pos together for correct calculations
+    for (PhysicalObject obj : list){
+      obj.update();
+    }
+
   }
 
-}
+}//class

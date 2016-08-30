@@ -23,6 +23,11 @@ public class PhysicalSphere extends PhysicalObject implements Drawable{
       this.setMass(1);
     }
 
+    public PhysicalSphere(double mass,double radius, double x, double y, double z, double sx, double sy, double sz){
+      this(radius, x,  y, z, sx, sy, sz);
+      this.setMass(mass);
+    }
+
     public Node draw(){
     	return sphere;
     }
