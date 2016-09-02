@@ -7,22 +7,22 @@ public class DemoThree{
   public DemoThree(){
     for (int i = 0; i < 500; i++){
             list.add(new PhysicalSphere(1,  //size
-                    Math.random()*0.2-0.1+500,  //xpos
-                    Math.random()*0.2-0.1,  //ypos
-                    Math.random()*0.2-0.1,  //zpos
-                    Math.random()*2-1,    //xspeed
-                    Math.random()*2-1,    //yspeed
-                    Math.random()*2-1));  //zspeed
+                    Math.random()*600.2-300.1+500,  //xpos
+                    Math.random()*600.2-300.1,  //ypos
+                    Math.random()*600.2-300.1,  //zpos
+                    0,//Math.random()*2-1,    //xspeed
+                    0,//Math.random()*2-1,    //yspeed
+                    0));//Math.random()*2-1));  //zspeed
     }
 
     for (int i = 0; i < 500; i++){
             list.add(new PhysicalSphere(1,  //size
-                    Math.random()*0.2-0.1-500,  //xpos
-                    Math.random()*0.2-0.1,  //ypos
-                    Math.random()*0.2-0.1,  //zpos
-                    Math.random()*2-1,    //xspeed
-                    Math.random()*2-1,    //yspeed
-                    Math.random()*2-1));  //zspeed
+                    Math.random()*600.2-300.1-500,  //xpos
+                    Math.random()*600.2-300.1,  //ypos
+                    Math.random()*600.2-300.1,  //zpos
+                    0,//Math.random()*2-1,    //xspeed
+                    0,//Math.random()*2-1,    //yspeed
+                    0));//Math.random()*2-1));  //zspeed
     }
 
   }

@@ -5,8 +5,8 @@ public class DemoTwo{
   ArrayList<PhysicalObject> list = new ArrayList<>();
 
   public DemoTwo(){
-    PhysicalSphere earth = new PhysicalSphere(10,0,0,0,0,0,0);
-    earth.setMass(100);
+    PhysicalSphere earth = new PhysicalSphere(10,1,1,1,0,0,0);
+    earth.setMass(1000);
     list.add(earth);
 
     PhysicalSphere moon = new PhysicalSphere(2,-100,0,0,0,10,10);

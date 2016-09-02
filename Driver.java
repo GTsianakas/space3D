@@ -31,7 +31,7 @@ public class Driver extends Application{
     scene.setFill(Color.web("000000"));
 
     //load objects and pass in group
-    sphereList = new DemoTest().getList();
+    sphereList = new DemoThree().getList();
     for (PhysicalObject sphere : sphereList){ root.getChildren().add(sphere.draw()); }
 
     this.addCoordLines(root);
@@ -49,8 +49,10 @@ public class Driver extends Application{
 
     //main loop
     new AnimationTimer(){
+
       @Override
       public void handle(long currentTime) {
+
         physics.updatePhysics();
         Driver.this.handleInput();
       }
@@ -58,7 +60,7 @@ public class Driver extends Application{
     stage.show();
   }
 
-  public void handleInput(){
+  private void handleInput(){
     //rotation
     if (userInput.contains("A")){ camera.rotateLeft(); }
     if (userInput.contains("D")){ camera.rotateRight(); }
@@ -78,7 +80,7 @@ public class Driver extends Application{
     if (userInput.contains("H")){ camera.moveOut(); }
   }
 
-  public void addCoordLines(Group root){
+  private void addCoordLines(Group root){
     Cylinder xCyl = new Cylinder(1.0,2000);
     Cylinder yCyl = new Cylinder(1.0,2000);
     Cylinder zCyl = new Cylinder(1.0,2000);
@@ -99,7 +101,7 @@ public class Driver extends Application{
     zCyl.setMaterial(new PhongMaterial(Color.BLUE));
   }
 
-  public void eventHandling(Scene scene, Stage stage){
+  private void eventHandling(Scene scene, Stage stage){
     //WindowEvents
     stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
           public void handle(WindowEvent we) {
@@ -127,4 +129,4 @@ public class Driver extends Application{
     });
   }
 
-}
+}//class
