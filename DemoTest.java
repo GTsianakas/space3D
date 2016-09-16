@@ -5,21 +5,25 @@ public class DemoTest{
   ArrayList<PhysicalObject> list = new ArrayList<>();
 
   public DemoTest(){
-    list.add(new PhysicalSphere(5.972E24,100,  //mass,size
-            0.1,  //xpos
-            0.1,  //ypos
-            0.1,  //zpos
+
+    list.add(new PhysicalSphere(5.972E24,10,  //mass //size
+            1,  //xpos
+            1,  //ypos
+            1,  //zpos
             0,//Math.random()*2-1,    //xspeed
             0,//Math.random()*2-1,    //yspeed
             0));//Math.random()*2-1));  //zspeed
 
-      list.add(new PhysicalSphere(7.34767309E22,10,  //mass,size
-              100,  //xpos
-              0.1,  //ypos
-              0.1,  //zpos
-              0,//Math.random()*2-1,    //xspeed
-              0,//Math.random()*2-1,    //yspeed
-              0));//Math.random()*2-1));  //zspeed
+
+
+    list.add(new PhysicalSphere(7.347E22,2,  //size
+            384400000,  //xpos
+            0,  //ypos
+            0,  //zpos
+            0,//Math.random()*2-1,    //xspeed
+            0,//Math.random()*2-1,    //yspeed
+            0));//Math.random()*2-1));  //zspeed
+
   }
 
 

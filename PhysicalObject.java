@@ -17,6 +17,10 @@ public abstract class PhysicalObject implements Drawable{
   private double posY;
   private double posZ;
 
+  private double posXOld;
+  private double posYOld;
+  private double posZOld;
+
   public void setMass(double m){
     this.mass = m;
   }
@@ -122,5 +126,35 @@ public abstract class PhysicalObject implements Drawable{
   }
 
   public void update(){}
+
+  public void setPosXOld(double p){
+    this.posXOld = p;
+  }
+
+  public void setPosYOld(double p){
+    this.posYOld = p;
+  }
+
+  public void setPosZOld(double p){
+    this.posZOld = p;
+  }
+
+  public double getPosXOld(){
+    return posXOld;
+  }
+
+  public double getPosYOld(){
+    return posYOld;
+  }
+
+  public double getPosZOld(){
+    return posZOld;
+  }
+
+  public void updateOldPositions(){
+    this.posXOld = this.posX;
+    this.posYOld = this.posY;
+    this.posZOld = this.posZ;
+  }
 
 }

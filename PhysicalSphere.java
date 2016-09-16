@@ -14,6 +14,10 @@ public class PhysicalSphere extends PhysicalObject implements Drawable{
     	this.setPosX(x);
     	this.setPosY(y);
     	this.setPosZ(z);
+      
+      this.setPosXOld(x);
+    	this.setPosYOld(y);
+    	this.setPosZOld(z);
 
     	this.setSpeedX(sx);
     	this.setSpeedY(sy);

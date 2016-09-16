@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Physics{
 
   private ArrayList<PhysicalObject> list = null;
-  private static double interval = 0.03;
+  private static double interval = 0.05;
   private static final double GRAVITY_CONSTANT = 6.67408E-11; //m^3.kg^-1.s^-2
 
   public Physics(ArrayList<PhysicalObject> po){
@@ -36,23 +36,25 @@ public class Physics{
   }
 
   public double getDistance(PhysicalObject o1, PhysicalObject o2){
-    //use of translate to update positions together
-    double a = o1.getPosX() - o2.draw().getTranslateX();
-    double b = o1.getPosY() - o2.draw().getTranslateY();
-    double c = o1.getPosZ() - o2.draw().getTranslateZ();
+
+    //working with old positions so we the values wont change meet calculations
+    double a = o1.getPosX() - o2.getPosXOld();
+    double b = o1.getPosY() - o2.getPosYOld();
+    double c = o1.getPosZ() - o2.getPosZOld();
+
     return Math.sqrt(a*a + b*b + c*c);
   }
 
   public double getDistanceX(PhysicalObject o1, PhysicalObject o2){
-    return o1.getPosX() - o2.getPosX();
+    return o1.getPosX() - o2.getPosXOld();
   }
 
   public double getDistanceY(PhysicalObject o1, PhysicalObject o2){
-    return o1.getPosY() - o2.getPosY();
+    return o1.getPosY() - o2.getPosYOld();
   }
 
   public double getDistanceZ(PhysicalObject o1, PhysicalObject o2){
-    return o1.getPosZ() - o2.getPosZ();
+    return o1.getPosZ() - o2.getPosZOld();
   }
 
   public void updatePhysics(){
@@ -60,7 +62,7 @@ public class Physics{
       for (PhysicalObject obj2 : list){
         if (obj1 != obj2){
 
-          //in order to work with negative coords, thats why getForce doesn't absolute the value
+          //opposite force
           obj1.setAccX(-getForceX(obj1,obj2) / obj1.getMass());
           obj1.setAccY(-getForceY(obj1,obj2) / obj1.getMass());
           obj1.setAccZ(-getForceZ(obj1,obj2) / obj1.getMass());
@@ -87,6 +89,7 @@ public class Physics{
     //to update pos together for correct calculations
     for (PhysicalObject obj : list){
       obj.update();
+      obj.updateOldPositions();
     }
 
   }

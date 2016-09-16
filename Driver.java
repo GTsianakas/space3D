@@ -30,15 +30,14 @@ public class Driver extends Application{
     Scene scene = new Scene(root,WIDTH,HEIGHT,true, SceneAntialiasing.BALANCED);
     scene.setFill(Color.web("000000"));
 
-    //load objects and pass in group
+    //choose demo and load it into scene
     sphereList = new DemoThree().getList();
     for (PhysicalObject sphere : sphereList){ root.getChildren().add(sphere.draw()); }
 
     this.addCoordLines(root);
     camera = new MovingCamera();
 
-    //lighting make objects shinier (or however you spell it)
-    root.getChildren().add(new AmbientLight(Color.WHITE));
+    root.getChildren().add(new AmbientLight(Color.WHITE)); //lighting make objects shinier (or however you spell it)
     scene.setCamera(camera);
     stage.setTitle("3d space testing");
     stage.setScene(scene);
@@ -52,7 +51,6 @@ public class Driver extends Application{
 
       @Override
       public void handle(long currentTime) {
-
         physics.updatePhysics();
         Driver.this.handleInput();
       }
@@ -80,6 +78,7 @@ public class Driver extends Application{
     if (userInput.contains("H")){ camera.moveOut(); }
   }
 
+  //xyz axis line meeting at (0,0,0)
   private void addCoordLines(Group root){
     Cylinder xCyl = new Cylinder(1.0,2000);
     Cylinder yCyl = new Cylinder(1.0,2000);
