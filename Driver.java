@@ -58,6 +58,7 @@ public class Driver extends Application{
     stage.show();
   }
 
+  //all movements relative to initial positions for now
   private void handleInput(){
     //rotation
     if (userInput.contains("A")){ camera.rotateLeft(); }

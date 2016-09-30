@@ -37,7 +37,7 @@ public class Physics{
 
   public double getDistance(PhysicalObject o1, PhysicalObject o2){
 
-    //working with old positions so we the values wont change meet calculations
+    //working with old positions so we the values wont change between calculations
     double a = o1.getPosX() - o2.getPosXOld();
     double b = o1.getPosY() - o2.getPosYOld();
     double c = o1.getPosZ() - o2.getPosZOld();
@@ -57,6 +57,33 @@ public class Physics{
     return o1.getPosZ() - o2.getPosZOld();
   }
 
+  //energy loss due to solar particles, meteorites, lights, and atoms throuout space
+  //more drag at the fastest direction of travel
+  private void energyLoss(PhysicalObject po){
+    double Xspeed = po.getSpeedX();
+    double Yspeed = po.getSpeedY();
+    double Zspeed = po.getSpeedZ();
+    double drag = 0.00000001;
+
+    if (Xspeed > 0){
+      po.setSpeedX(Xspeed-(drag * Xspeed));
+    }else{
+      po.setSpeedX(Xspeed+(drag * Xspeed));
+    }
+
+    if (Yspeed > 0){
+      po.setSpeedY(Yspeed-(drag * Yspeed));
+    }else{
+      po.setSpeedY(Yspeed+(drag * Yspeed));
+    }
+
+    if (Zspeed > 0){
+      po.setSpeedZ(Zspeed-(drag * Zspeed));
+    }else{
+      po.setSpeedZ(Zspeed+(drag * Zspeed));
+    }
+  }
+
   public void updatePhysics(){
     for (PhysicalObject obj1 : list){
       for (PhysicalObject obj2 : list){
@@ -74,6 +101,9 @@ public class Physics{
           //z speed
           obj1.setSpeedZ(obj1.getAccZ() * interval + obj1.getSpeedZ());
 
+          //adding drag
+          this.energyLoss(obj1);
+
           double forceX = (-obj1.getAccX()) * interval;
           double forceY = (-obj1.getAccY()) * interval;
           double forceZ = (-obj1.getAccZ()) * interval;
@@ -83,6 +113,9 @@ public class Physics{
           obj1.setPosY(obj1.getPosY()+obj1.getSpeedY()*interval - 0.5*forceY* interval * obj1.getAccY());
           obj1.setPosZ(obj1.getPosZ()+obj1.getSpeedZ()*interval - 0.5*forceZ* interval * obj1.getAccZ());
           //System.out.println(obj1.getPosX());
+
+
+
         }
       }
     }
