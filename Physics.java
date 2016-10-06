@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Physics{
 
   private ArrayList<PhysicalObject> list = null;
-  private static double interval = 0.05;
+  private static double interval = 0.03;
   private static final double GRAVITY_CONSTANT = 6.67408E-11; //m^3.kg^-1.s^-2
 
   public Physics(ArrayList<PhysicalObject> po){
@@ -63,24 +63,24 @@ public class Physics{
     double Xspeed = po.getSpeedX();
     double Yspeed = po.getSpeedY();
     double Zspeed = po.getSpeedZ();
-    double drag = 0.00000001;
+    double drag = 0.000001;
 
     if (Xspeed > 0){
-      po.setSpeedX(Xspeed-(drag * Xspeed));
+      po.setSpeedX(Xspeed-(drag * (Xspeed*Xspeed/2)));
     }else{
-      po.setSpeedX(Xspeed+(drag * Xspeed));
+      po.setSpeedX(Xspeed+(drag * (Xspeed*Xspeed/2)));
     }
 
     if (Yspeed > 0){
-      po.setSpeedY(Yspeed-(drag * Yspeed));
+      po.setSpeedY(Yspeed-(drag * (Yspeed*Yspeed/2)));
     }else{
-      po.setSpeedY(Yspeed+(drag * Yspeed));
+      po.setSpeedY(Yspeed+(drag * (Yspeed*Yspeed/2)));
     }
 
     if (Zspeed > 0){
-      po.setSpeedZ(Zspeed-(drag * Zspeed));
+      po.setSpeedZ(Zspeed-(drag * (Zspeed*Zspeed/2)));
     }else{
-      po.setSpeedZ(Zspeed+(drag * Zspeed));
+      po.setSpeedZ(Zspeed+(drag * (Zspeed*Zspeed/2)));
     }
   }
 
